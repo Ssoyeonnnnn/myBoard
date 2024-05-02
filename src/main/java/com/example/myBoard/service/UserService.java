@@ -20,7 +20,7 @@ public class UserService {
     EntityManager em;
 
     @Transactional
-    public void createUser(UserCreateForm userCreateForm) {
+    public void createUser(UserCreateForm userCreateForm) { //회원가입을 할 때
         UserAccount account = new UserAccount();
         account.setUserId(userCreateForm.getUsername());
         account.setUserPassword(passwordEncoder.encode(
@@ -28,10 +28,10 @@ public class UserService {
         ));
         account.setEmail(userCreateForm.getEmail());
         account.setNickname(userCreateForm.getNickname());
-        if ("ADMIN".equals(userCreateForm.getUsername().toUpperCase())) {
+        if ("ADMIN".equals(userCreateForm.getUsername().toUpperCase())) { //admin 이면 관리자 권한을 준다
             account.setUserRole(UserRole.ADMIN);
         } else {
-            account.setUserRole(UserRole.USER);
+            account.setUserRole(UserRole.USER); //그 외는 사용자 권한을 준다
         }
         em.persist(account);
     }
