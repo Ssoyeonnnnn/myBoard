@@ -13,26 +13,26 @@ public class SecurityConfig {
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
         return new BCryptPasswordEncoder();
-    }
+    } //비밀번호 암호화
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests((request) -> request
-                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
-                        .requestMatchers("/user/**").permitAll()
+                .authorizeHttpRequests((request) -> request //5
+                        .requestMatchers("/css/**", "/js/**", "/images/**").permitAll() //2
+                        .requestMatchers("/user/**").permitAll() //3
 //                        .requestMatchers("/**").permitAll())
-                        .anyRequest().authenticated())
+                        .anyRequest().authenticated()) //1 -> 4
 
-                .formLogin((form) -> form
+                .formLogin((form) -> form //6
                         .loginPage("/user/login")
-                        .loginProcessingUrl("/login")
+                        .loginProcessingUrl("/login") //login 에서 submit 보낸 내용은 Controller 가 아닌 이쪽으로 온다.
 //                        .usernameParameter("email") //email 로 login 을 실행하겠다는 의미 email 은 기본키가 아니라서 Repository 에 Query 메서드를 만들어서 eamil 을 찾아야한다
                         .defaultSuccessUrl("/"))
 
-                .logout((out) -> out
+                .logout((out) -> out //7
                         .logoutSuccessUrl("/")
                         .logoutUrl("/logout")
                 );
-        return http.build();
+        return http.build(); //filterChain 생성해서 반환 //8
     }
 }

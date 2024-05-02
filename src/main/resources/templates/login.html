@@ -11,6 +11,7 @@
 <body>
 <div class="content" layout:fragment="content">
     <h4>로그인</h4>
+    <!--  2.  Post 로 파라미터를 가리고 SecurityConfig에 /login 부분으로 이동-->
     <form id="frm" name="frm" class="container"  th:action="@{/login}" method="post" >
         <div class="mb3">
             <label class="form-label">사용자ID</label>
@@ -21,7 +22,8 @@
             <input  id="password" name="password" type="password"
                     class="form-control">
         </div>
-        <input type="submit" value="로그인" class="btn btn-primary" >
+        <!--  1.  로그인을 눌렀을 때 작성한 ID,password 를-->
+        <input type="submit" value="로그인" class="btn btn-primary">
     </form>
 </div>
 </body>
