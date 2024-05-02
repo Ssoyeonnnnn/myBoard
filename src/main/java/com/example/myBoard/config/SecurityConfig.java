@@ -20,12 +20,13 @@ public class SecurityConfig {
                 .authorizeHttpRequests((request) -> request
                         .requestMatchers("/css/**", "/js/**", "/images/**").permitAll()
                         .requestMatchers("/user/**").permitAll()
-                        .requestMatchers("/**").permitAll())
-//                        .anyRequest().authenticated())
+//                        .requestMatchers("/**").permitAll())
+                        .anyRequest().authenticated())
 
                 .formLogin((form) -> form
                         .loginPage("/user/login")
                         .loginProcessingUrl("/login")
+//                        .usernameParameter("email") //email 로 login 을 실행하겠다는 의미 email 은 기본키가 아니라서 Repository 에 Query 메서드를 만들어서 eamil 을 찾아야한다
                         .defaultSuccessUrl("/"))
 
                 .logout((out) -> out
